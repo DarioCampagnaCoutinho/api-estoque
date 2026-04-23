@@ -203,29 +203,73 @@ curl -X PUT http://localhost:8080/api/users/2/permissions \
 ## Estrutura do Projeto
 
 ```
-app/
-├── Http/
-│   ├── Controllers/
-│   │   ├── AuthController.php
-│   │   ├── UserController.php
-│   │   ├── RoleController.php
-│   │   ├── PermissionController.php
-│   │   ├── ProductController.php
-│   │   └── StockController.php
-│   ├── Middleware/
-│   │   └── CheckPermission.php
-│   └── Requests/
-│       ├── LoginRequest.php
-│       ├── StoreProductRequest.php
-│       ├── UpdateProductRequest.php
-│       └── StockMovementRequest.php
-├── Models/
-│   ├── User.php
-│   ├── Role.php
-│   ├── Permission.php
-│   ├── Product.php
-│   ├── Stock.php
-│   └── StockMovement.php
-└── Services/
-    └── StockService.php
+.
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── AuthController.php
+│   │   │   ├── Controller.php
+│   │   │   ├── PermissionController.php
+│   │   │   ├── ProductController.php
+│   │   │   ├── RoleController.php
+│   │   │   ├── StockController.php
+│   │   │   └── UserController.php
+│   │   ├── Middleware/
+│   │   │   └── CheckPermission.php
+│   │   └── Requests/
+│   │       ├── LoginRequest.php
+│   │       ├── StockMovementRequest.php
+│   │       ├── StoreProductRequest.php
+│   │       └── UpdateProductRequest.php
+│   ├── Models/
+│   │   ├── Permission.php
+│   │   ├── Product.php
+│   │   ├── Role.php
+│   │   ├── Stock.php
+│   │   ├── StockMovement.php
+│   │   └── User.php
+│   └── Services/
+│       └── StockService.php
+├── bootstrap/
+│   ├── app.php
+│   ├── cache/
+│   └── providers.php
+├── config/
+│   ├── app.php
+│   ├── auth.php
+│   ├── cache.php
+│   ├── database.php
+│   ├── filesystems.php
+│   ├── hashing.php
+│   ├── logging.php
+│   ├── sanctum.php
+│   └── session.php
+├── database/
+│   ├── migrations/
+│   └── seeders/
+│       └── DatabaseSeeder.php
+├── docker/
+│   └── entrypoint.sh
+├── nginx/
+│   └── default.conf
+├── public/
+│   └── index.php
+├── routes/
+│   ├── api.php
+│   └── console.php
+├── storage/
+│   ├── app/
+│   │   ├── private/
+│   │   └── public/
+│   ├── framework/
+│   │   ├── cache/
+│   │   ├── sessions/
+│   │   └── views/
+│   └── logs/
+├── .env.example
+├── artisan
+├── composer.json
+├── docker-compose.yml
+├── Dockerfile
+└── README.md
 ```
