@@ -36,11 +36,23 @@ docker compose up -d --build
 # 4. Gere a APP_KEY
 docker compose exec app php artisan key:generate
 
-# 5. (Opcional) Rode seeders manualmente se o entrypoint já não rodou
+# 5. Reinicie a aplicação para recarregar a configuração cacheada
+docker compose restart app
+
+# 6. (Opcional) Rode seeders manualmente
 docker compose exec app php artisan migrate --seed
 ```
 
 A API estará disponível em: `http://localhost:8080/api`
+
+MySQL ficará exposto no host em: `localhost:3307`
+
+Se você estiver recriando o ambiente após falhas de migration ou banco inconsistente:
+
+```bash
+docker compose down -v
+docker compose up -d --build
+```
 
 ---
 
@@ -55,6 +67,11 @@ Authorization: Bearer {token}
 ---
 
 ## Endpoints
+
+### Health
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | `/api/health` | Status da aplicação e serviços configurados |
 
 ### Auth
 | Método | Endpoint | Descrição |
@@ -119,6 +136,11 @@ Authorization: Bearer {token}
 curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@example.com","password":"password"}'
+```
+
+### Healthcheck
+```bash
+curl http://localhost:8080/api/health
 ```
 
 ### Criar Produto
@@ -187,6 +209,8 @@ curl -X PUT http://localhost:8080/api/users/2/permissions \
 |---------|-------|-------|------|
 | Admin | admin@example.com | password | admin |
 | Manager | manager@example.com | password | manager |
+
+Os usuários acima só existirão após executar o seeder manualmente.
 
 ---
 
