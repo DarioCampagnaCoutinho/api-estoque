@@ -33,27 +33,10 @@ return new class extends Migration
             $table->unique(['role_id', 'permission_id']);
         });
 
-        // Permissões individuais atribuídas diretamente ao usuário
-        Schema::create('user_permission', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('permission_id')->constrained()->cascadeOnDelete();
-            $table->unique(['user_id', 'permission_id']);
-        });
-
-        // Grupos atribuídos ao usuário
-        Schema::create('user_role', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('role_id')->constrained()->cascadeOnDelete();
-            $table->unique(['user_id', 'role_id']);
-        });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('user_role');
-        Schema::dropIfExists('user_permission');
         Schema::dropIfExists('role_permission');
         Schema::dropIfExists('roles');
         Schema::dropIfExists('permissions');

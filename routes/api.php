@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HealthController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // ─── Autenticação pública ────────────────────────────────────────────────────
+Route::get('/health', HealthController::class);
 Route::post('/auth/login', [AuthController::class, 'login']);
 
 // ─── Rotas protegidas (Sanctum) ──────────────────────────────────────────────
