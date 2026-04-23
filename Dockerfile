@@ -8,8 +8,7 @@ COPY composer.json composer.lock* ./
 RUN composer install \
     --no-dev \
     --no-scripts \
-    --no-autoloader \
-    --ignore-platform-reqs
+    --no-autoloader
 
 COPY . .
 RUN composer dump-autoload --optimize --no-dev
