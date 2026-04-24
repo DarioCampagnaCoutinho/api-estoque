@@ -50,11 +50,20 @@ class AuthController extends Controller
      */
     public function me(Request $request): JsonResponse
     {
-        $user = $request->user()->load('roles');
+        $user = $request->user()->load('roles', 'directPermissions');
 
         return response()->json([
-            'user'        => $user,
-            'permissions' => $user->allPermissions()->values(),
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'email_verified_at' => $user->email_verified_at,
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+                'roles' => $user->roles,
+                'direct_permissions' => $user->directPermissions,
+                'all_permissions' => $user->allPermissions()->values(),
+            ],
         ]);
     }
 }

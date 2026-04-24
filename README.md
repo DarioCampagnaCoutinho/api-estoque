@@ -131,6 +131,8 @@ Authorization: Bearer {token}
 
 ## Exemplos de Requisições
 
+Para importar uma coleção inicial no Insomnia, use o arquivo `docs/insomnia-collection.json`.
+
 ### Login
 ```bash
 curl -X POST http://localhost:8080/api/auth/login \

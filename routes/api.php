@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Route;
 
 // ─── Autenticação pública ────────────────────────────────────────────────────
 Route::get('/health', HealthController::class);
+Route::get('/auth/debug', function (\Illuminate\Http\Request $request) {
+    return response()->json([
+        'has_authorization_header' => $request->headers->has('authorization'),
+        'authorization_prefix' => str($request->header('authorization', ''))->before(' ')->toString(),
+        'has_bearer_token' => $request->bearerToken() !== null,
+    ]);
+});
 Route::post('/auth/login', [AuthController::class, 'login']);
 
 // ─── Rotas protegidas (Sanctum) ──────────────────────────────────────────────
